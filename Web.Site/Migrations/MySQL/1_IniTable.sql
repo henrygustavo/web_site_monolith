@@ -20,14 +20,14 @@ CREATE TABLE product (
 CREATE TABLE organization (
   organization_id int(11) NOT NULL AUTO_INCREMENT,
   organization_name varchar(45) NOT NULL,
-  ruc varchar(11) NOT NULLL,
+  ruc varchar(11) NOT NULL,
   PRIMARY KEY (organization_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE role (
   role_id int(11) NOT NULL AUTO_INCREMENT,
-  role_name varchar(45) NOT NULL
+  role_name varchar(45) NOT NULL,
   PRIMARY KEY (role_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -35,7 +35,7 @@ CREATE TABLE role (
 CREATE TABLE user (
   user_id int(11) NOT NULL AUTO_INCREMENT,
   user_name varchar(45) NOT NULL,
-  password varchar(11) NOT NULLL,
+  password varchar(11) NOT NULL,
   role_id int(11) NOT NULL,
   PRIMARY KEY (user_id),
   CONSTRAINT user_role_id FOREIGN KEY (role_id) REFERENCES role (role_id)
