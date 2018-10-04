@@ -7,8 +7,8 @@
     {
         public ProjectMap()
         {
-            Id(x => x.Id).Column("user_id");
-            Map(x => x.Name).Column("name");
+            Id(x => x.Id).Column("project_id");
+            Map(x => x.Name).Column("project_name");
             Component(x => x.Balance, m =>
             {
                 m.Map(x => x.Amount, "price");

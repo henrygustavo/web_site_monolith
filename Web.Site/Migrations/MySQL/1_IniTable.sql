@@ -16,3 +16,39 @@ CREATE TABLE product (
   PRIMARY KEY(product_id),
   CONSTRAINT product_category_id FOREIGN KEY (category_id) REFERENCES category (category_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE organization (
+  organization_id int(11) NOT NULL AUTO_INCREMENT,
+  organization_name varchar(45) NOT NULL,
+  ruc varchar(11) NOT NULLL,
+  PRIMARY KEY (organization_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE role (
+  role_id int(11) NOT NULL AUTO_INCREMENT,
+  role_name varchar(45) NOT NULL
+  PRIMARY KEY (role_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE user (
+  user_id int(11) NOT NULL AUTO_INCREMENT,
+  user_name varchar(45) NOT NULL,
+  password varchar(11) NOT NULLL,
+  role_id int(11) NOT NULL,
+  PRIMARY KEY (user_id),
+  CONSTRAINT user_role_id FOREIGN KEY (role_id) REFERENCES role (role_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE project (
+  project_id int(11) NOT NULL AUTO_INCREMENT,
+  project_name varchar(45) NOT NULL,
+  price decimal(10,2) NOT NULL,
+  currency varchar(3) NOT NULL,
+  organization_id int(11) NOT NULL,
+  PRIMARY KEY (project_id),
+  CONSTRAINT project_organization_id FOREIGN KEY (organization_id) REFERENCES organization (organization_id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -8,7 +8,7 @@
         public OrganizationMap()
         {
             Id(x => x.Id).Column("organization_id");
-            Map(x => x.Name).Column("name");
+            Map(x => x.Name).Column("organization_name");
             Map(x => x.Ruc).Column("ruc");
         }
     }
