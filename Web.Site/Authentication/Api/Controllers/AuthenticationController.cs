@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Web.Site.Authentication.Application.Dto;
 using Web.Site.Authentication.Application.Service;
 
-namespace Web.Site.Authentication.Api
+namespace Web.Site.Authentication.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/auth")]
@@ -16,6 +17,7 @@ namespace Web.Site.Authentication.Api
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public IActionResult SignUp(AuthenticationDTO model)
         {
             _authenticationAplicationService.SignUp(model);
