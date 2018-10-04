@@ -14,6 +14,14 @@
     using Web.Site.Product.Infrastructure.Persistence.NHibernate.Repository;
     using Web.Site.Product.Application.Service;
     using Web.Site.Product.Application.Assembler;
+    using Web.Site.Authentication.Application.Assembler;
+    using Web.Site.Authentication.Application.Service;
+    using Web.Site.User.Domain.Repository;
+    using Web.Site.User.Infrastructure.Persistence.NHibernate.Repository;
+    using Web.Site.Organization.Infrastructure.Persistence.NHibernate.Repository;
+    using Web.Site.Organization.Domain.Repository;
+    using Web.Site.Project.Infrastructure.Persistence.NHibernate.Repository;
+    using Web.Site.Project.Domain.Repository;
 
     public class Startup
     {
@@ -35,6 +43,7 @@
 
             services.AddSingleton(new ProductCreateAssembler(mapper));
             services.AddSingleton(new CategoryCreateAssembler(mapper));
+            services.AddSingleton(new AuthenticationCreateAssembler(mapper));
 
             services.AddScoped<IUnitOfWork, UnitOfWorkNHibernate>();
 
@@ -50,8 +59,27 @@
                 return new CategoryNHibernateRepository((UnitOfWorkNHibernate)unitOfWork);
             });
 
+            services.AddTransient<IUserRepository, UserNHibernateRepository>((ctx) =>
+            {
+                IUnitOfWork unitOfWork = ctx.GetService<IUnitOfWork>();
+                return new UserNHibernateRepository((UnitOfWorkNHibernate)unitOfWork);
+            });
+
+            services.AddTransient<IOrganizationRepository,OrganizationNHibernateRepository>((ctx) =>
+            {
+                IUnitOfWork unitOfWork = ctx.GetService<IUnitOfWork>();
+                return new OrganizationNHibernateRepository((UnitOfWorkNHibernate)unitOfWork);
+            });
+
+            services.AddTransient<IProjectRepository, ProjectNHibernateRepository>((ctx) =>
+            {
+                IUnitOfWork unitOfWork = ctx.GetService<IUnitOfWork>();
+                return new ProjectNHibernateRepository((UnitOfWorkNHibernate)unitOfWork);
+            });
+
             services.AddTransient<IProductApplicationService, ProductApplicationService>();
             services.AddTransient<ICategoryApplicationService, CategoryApplicationService>();
+            services.AddTransient<IAuthenticationAplicationService, AuthenticationAplicationService>();
 
             services.AddSwaggerGen(c =>
             {
