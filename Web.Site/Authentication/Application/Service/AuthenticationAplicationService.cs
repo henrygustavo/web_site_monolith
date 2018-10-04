@@ -48,17 +48,17 @@
 
             try
             {
-                User user = _authenticationCreateAssembler.ToUserEntity(model);
-
+               
                 Organization organization = _authenticationCreateAssembler.ToOrganizationEntity(model);
 
-                Project project = _authenticationCreateAssembler.ToProjectEntity(model);
+                _organizationRepository.Create(organization);
+
+                User user = _authenticationCreateAssembler.ToUserEntity(model);
+                user.Organization = organization;
 
                 _userRepository.Create(user);
 
-                organization.User = user;
-
-                _organizationRepository.Create(organization);
+                Project project = _authenticationCreateAssembler.ToProjectEntity(model);
 
                 project.Organization = organization;
 

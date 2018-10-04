@@ -11,6 +11,7 @@
             Map(x => x.UserName).Column("user_name");
             Map(x => x.Password).Column("password");
             References(x => x.Role);
+            References(x => x.Organization);
         }
     }
 }

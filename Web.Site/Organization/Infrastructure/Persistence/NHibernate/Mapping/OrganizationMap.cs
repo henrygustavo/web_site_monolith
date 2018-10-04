@@ -10,7 +10,6 @@
             Id(x => x.Id).Column("organization_id");
             Map(x => x.Name).Column("name");
             Map(x => x.Ruc).Column("ruc");
-            References(x => x.User);
         }
     }
 }
