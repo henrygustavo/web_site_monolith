@@ -59,6 +59,12 @@
                 return new CategoryNHibernateRepository((UnitOfWorkNHibernate)unitOfWork);
             });
 
+            services.AddTransient<IRoleRepository, RoleNHibernateRepository>((ctx) =>
+            {
+                IUnitOfWork unitOfWork = ctx.GetService<IUnitOfWork>();
+                return new RoleNHibernateRepository((UnitOfWorkNHibernate)unitOfWork);
+            });
+
             services.AddTransient<IUserRepository, UserNHibernateRepository>((ctx) =>
             {
                 IUnitOfWork unitOfWork = ctx.GetService<IUnitOfWork>();

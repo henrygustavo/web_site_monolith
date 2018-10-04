@@ -17,20 +17,22 @@
         private readonly IUserRepository _userRepository;
         private readonly IOrganizationRepository _organizationRepository;
         private readonly IProjectRepository _projectRepository;
+        private readonly IRoleRepository _roleRepository;
         private readonly AuthenticationCreateAssembler _authenticationCreateAssembler;
 
         public AuthenticationAplicationService(IUnitOfWork unitOfWork,
             IUserRepository userRepository,
             IOrganizationRepository organizationRepository,
             IProjectRepository projectRepository,
+            IRoleRepository roleRepository,
             AuthenticationCreateAssembler authenticationCreateAssembler)
         {
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
             _organizationRepository = organizationRepository;
             _projectRepository = projectRepository;
+            _roleRepository = roleRepository;
             _authenticationCreateAssembler = authenticationCreateAssembler;
-
 
         }
 
@@ -53,7 +55,13 @@
 
                 _organizationRepository.Create(organization);
 
+
+                var newRole = new Role { Name = "Owner" };
+
+                 _roleRepository.Create(newRole);
+
                 User user = _authenticationCreateAssembler.ToUserEntity(model);
+                user.Role = newRole;
                 user.Organization = organization;
 
                 _userRepository.Create(user);
